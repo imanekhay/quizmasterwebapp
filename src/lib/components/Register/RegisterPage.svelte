@@ -36,7 +36,6 @@
 			return;
 		}
 
-		// You might want to send a request to the server here to register the user
 		fetch('/api/auth/signup', {
 			method: 'POST',
 			body: JSON.stringify({ username, password, dob }),
