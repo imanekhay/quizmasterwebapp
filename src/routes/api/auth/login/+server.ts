@@ -1,32 +1,37 @@
-// src/routes/api/auth/login/+server.ts
 import { json } from '@sveltejs/kit';
-import { connect } from '$lib/database'; // Import the database connection
-import type { RowDataPacket } from 'mysql2';
+import { connect } from '$lib/database';
 import bcrypt from 'bcrypt';
 
+type User = {
+	id: number;
+	username: string;
+	password: string;
+	dob: string;
+};
+
 export const POST = async ({ request }) => {
-	const { username, password } = await request.json();
-
 	try {
-		const db = await connect();
+		const { username, password } = await request.json();
+		const client = await connect();
+		const [rows] = await client.query('SELECT * FROM users WHERE username = ?', [username]);
 
-		const [rows] = await db.query<RowDataPacket[]>('SELECT * FROM users WHERE username = ?', [
-			username
-		]);
-		if (rows.length === 0) {
-			return json({ error: 'Invalid username or password' }, { status: 400 });
+		const users = rows as User[];
+		if (users.length === 0) {
+			return json({ success: false, error: 'Invalid username or password' }, { status: 401 });
 		}
 
-		const user = rows[0];
-		const passwordMatch = await bcrypt.compare(password, user.password);
+		const user = users[0];
+		const match = await bcrypt.compare(password, user.password);
 
-		if (!passwordMatch) {
-			return json({ error: 'Invalid username or password' }, { status: 400 });
+		await client.end();
+
+		if (!match) {
+			return json({ success: false, error: 'Invalid username or password' }, { status: 401 });
 		}
 
-		return json({ message: 'Login successful' });
+		return json({ success: true }, { status: 200 });
 	} catch (error) {
-		console.error(error);
-		return json({ error: 'Error logging in' }, { status: 500 });
+		console.error('Login server error:', error);
+		return json({ success: false, error: 'Server error' }, { status: 500 });
 	}
 };
