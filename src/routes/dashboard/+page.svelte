@@ -1,4 +1,10 @@
 <script>
+	import { onMount } from 'svelte';
+	import LogoutButton from '$lib/components/LogoutButton.svelte';
+	import Profile from '$lib/components/Profile.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
+
+	let username = '';
 	let searchTerm = '';
 
 	let categories = [
@@ -13,9 +19,18 @@
 		{ name: 'Technology', path: 'technology' },
 		{ name: 'Sports', path: 'sports' }
 	];
+
+	onMount(() => {
+		username = localStorage.getItem('username') || '';
+	});
 </script>
 
-<div class="dashboard">
+<Navbar {username} />
+
+<div class="dashboard" style="position:relative;">
+	<LogoutButton />
+	<Profile {username} />
+
 	<!-- Search Bar -->
 	<div class="search-bar">
 		<img src="/searchicon.png" alt="Search Icon" width="20" height="20" />
@@ -34,8 +49,6 @@
 						<h3>{category.name} Quiz</h3>
 					</div>
 				</div>
-
-				<!-- Start button -->
 				<a href={`/quiz/${category.path}`} class="start-button">Start</a>
 			</div>
 		{/each}

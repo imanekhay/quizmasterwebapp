@@ -12,6 +12,7 @@
 		const success = await login(username, password);
 		if (success) {
 			console.log('Login successful');
+			localStorage.setItem('username', username); // Save username
 			goto('/dashboard'); // Redirect to dashboard
 		} else {
 			console.log('Login failed');

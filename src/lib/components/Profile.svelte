@@ -1,16 +1,16 @@
-<script lang="ts">
-	export let user: { name: string; quizzesTaken: number };
+<script>
+	export let username = 'User';
 </script>
 
-<div class="profile">
-	<h2>Welcome, {user.name}!</h2>
-	<p>Quizzes Taken: {user.quizzesTaken}</p>
+<div class="profile-message">
+	Welcome {username}, are you ready for a quiz?
 </div>
 
 <style>
-	.profile {
-		padding: 1rem;
-		background-color: #efeffd;
-		border-radius: 20px;
+	.profile-message {
+		font-size: 1.2rem;
+		font-weight: 500;
+		color: #410095;
+		margin: 30px 20px 0 20px;
 	}
 </style>
