@@ -3,6 +3,7 @@
 	import LogoutButton from '$lib/components/LogoutButton.svelte';
 	import Profile from '$lib/components/Profile.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
+	import SearchBar from '$lib/components/SearchBar.svelte';
 
 	let username = '';
 	let searchTerm = '';
@@ -32,10 +33,7 @@
 	<Profile {username} />
 
 	<!-- Search Bar -->
-	<div class="search-bar">
-		<img src="/searchicon.png" alt="Search Icon" width="20" height="20" />
-		<input type="text" placeholder="Search for a quiz..." bind:value={searchTerm} />
-	</div>
+	<SearchBar bind:searchTerm />
 
 	<!-- Quiz Cards -->
 	<div class="quiz-section">
@@ -87,23 +85,6 @@
 			flex-direction: column;
 			min-height: unset;
 		}
-	}
-
-	.search-bar {
-		margin: 20px;
-		display: flex;
-		align-items: center;
-		background: #efeffd;
-		border-radius: 50px;
-		padding: 10px 20px;
-	}
-
-	.search-bar input {
-		border: none;
-		background: transparent;
-		width: 100%;
-		font-size: 14px;
-		outline: none;
 	}
 
 	.quiz-section {
