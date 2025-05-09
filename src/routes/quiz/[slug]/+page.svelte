@@ -163,20 +163,20 @@
 
 	.answers button {
 		background: #efeffd;
-		padding: 15px 20px;
+		color: #410095;
+		border: 2px solid #8322ff;
 		border-radius: 20px;
-		border: 2px solid transparent;
-		font-size: 16px;
-		font-weight: 500;
+		padding: 12px 24px;
+		margin: 10px 0;
+		font-size: 1rem;
 		cursor: pointer;
-		transition: all 0.25s ease;
-		box-shadow: 0 4px 10px rgba(130, 34, 255, 0.05);
-		user-select: none;
+		transition:
+			background 0.2s,
+			color 0.2s;
 	}
-
 	.answers button:hover {
-		background: #d6c9ff;
-		transform: translateY(-2px);
+		background: #8322ff;
+		color: #fff;
 	}
 
 	.answers button.selected {

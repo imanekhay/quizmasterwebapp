@@ -4,6 +4,7 @@
 	import Profile from '$lib/components/Profile.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import SearchBar from '$lib/components/SearchBar.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 
 	let username = '';
 	let searchTerm = '';
@@ -58,6 +59,8 @@
 	</div>
 </div>
 
+<Footer />
+
 <style lang="css">
 	.dashboard {
 		max-width: 1200px;
@@ -70,6 +73,7 @@
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
+		padding-bottom: 80px;
 	}
 
 	@media (max-width: 600px) {
