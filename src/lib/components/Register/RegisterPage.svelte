@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'; // This is used for navigation after registration
-	import { login } from '../Login/Login';
+
 	import './register.css';
 
 	let username = '';
